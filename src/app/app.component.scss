@@ -1,0 +1,41 @@
+.mat-toolbar {
+  color: #fff;
+  margin-bottom: 10px;
+  background-color: #005cbb;
+}
+
+.table-container {
+  border-radius: 5px;
+  position: relative;
+
+  .loader-container {
+    height: 5px;
+  }
+
+  .container {
+    overflow: auto;
+    position: relative;
+    padding: 0 5px 0px 5px;
+    max-height: calc(100vh - 150px);
+
+    table {
+      width: 100%;
+
+      .mat-column-number,
+      .mat-column-state {
+        max-width: 64px;
+      }
+
+      .mat-column-created {
+        max-width: 124px;
+      }
+    }
+  }
+}
+
+.fab-container {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 100;
+}
