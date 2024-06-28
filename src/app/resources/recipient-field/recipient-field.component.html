@@ -1,0 +1,111 @@
+<div class="recipient-container">
+  <div class="recipient-list-wrapper">
+    <mat-list #recipients>
+      @for (recipient of recipientList; track recipient.id; let idx = $index;) {
+      <mat-list-item [class.edit-list-row]="recipient.editMode">
+        @if (recipient.type === smsMedium) {
+        <mat-icon matListItemIcon>sms</mat-icon>
+        } @else if (recipient.type === emailMedium) {
+        <mat-icon matListItemIcon>mail</mat-icon>
+        }
+        <div matListItemTitle [class.cross-recipient]="!recipient.checked">
+          {{ recipient.recipient }}
+        </div>
+        <div matListItemMeta>
+          <div class="list-actions-row">
+            <div class="actions-flex-container">
+              <button
+                mat-icon-button
+                (click)="toggleRecipient(idx)"
+                aria-label="Check or Uncheck recipient"
+              >
+                @if (recipient.checked) {
+                <mat-icon>check_box</mat-icon>
+                } @else {
+                <mat-icon>check_box_outline_blank</mat-icon>
+                }
+              </button>
+              <button
+                mat-icon-button
+                (click)="editRecipient(idx)"
+                aria-label="Edit recipient"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                (click)="deleteRecipient(idx)"
+                aria-label="Delete recipient"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-list-item>
+      }
+    </mat-list>
+  </div>
+  <form class="recipient-form">
+    @if(mediumType === smsMedium) {
+    <mat-form-field class="recipient-full-width">
+      <mat-label>Enter a Phone Number</mat-label>
+      <span matTextPrefix>+91 &nbsp;</span>
+      <input
+        type="tel"
+        matInput
+        id="phoneFormControl"
+        name="phoneFormControl"
+        [formControl]="phoneFormControl"
+        aria-label="Enter a Phone Number"
+        [errorStateMatcher]="errorMatcher"
+      />
+      <button
+        matSuffix
+        mat-icon-button
+        (click)="addRecipient()"
+        class="add-recipient-button"
+        [disabled]="phoneFormControl.invalid"
+        aria-label="Click to add recipient"
+      >
+        <mat-icon>add_circle</mat-icon>
+      </button>
+      @if (phoneFormControl.hasError('pattern') &&
+      !phoneFormControl.hasError('required')) {
+      <mat-error>Please enter a valid phone number</mat-error>
+      } @if (phoneFormControl.hasError('required')) {
+      <mat-error>Phone Number is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    } @else if (mediumType === emailMedium) {
+    <mat-form-field class="recipient-full-width">
+      <mat-label>Enter an Email</mat-label>
+      <input
+        type="email"
+        matInput
+        id="emailFormControl"
+        name="emailFormControl"
+        aria-label="Enter an Email"
+        [formControl]="emailFormControl"
+        [errorStateMatcher]="errorMatcher"
+      />
+      <button
+        matSuffix
+        mat-icon-button
+        (click)="addRecipient()"
+        class="add-recipient-button"
+        [disabled]="emailFormControl.invalid"
+        aria-label="Click to add recipient"
+      >
+        <mat-icon>add_circle</mat-icon>
+      </button>
+      @if (emailFormControl.hasError('email') &&
+      !emailFormControl.hasError('required')) {
+      <mat-error>Please enter a valid email address</mat-error>
+      } @if (emailFormControl.hasError('required')) {
+      <mat-error>Email is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    } @else { }
+  </form>
+</div>

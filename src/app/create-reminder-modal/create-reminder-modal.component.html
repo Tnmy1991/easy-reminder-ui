@@ -1,8 +1,44 @@
-<h2 mat-dialog-title>Dialog with elements</h2>
-<mat-dialog-content
-  >This dialog showcases the title, close, content and actions
-  elements.</mat-dialog-content
->
+<h2 mat-dialog-title>Define & Create Reminder</h2>
+<mat-dialog-content>
+  <div class="layout-container">
+    <div class="medium-form">
+      <form [formGroup]="mediumForm">
+        <mat-label>Select Desired Medium:</mat-label>
+        <mat-radio-group
+          class="medium-radio-group"
+          formControlName="mediumType"
+          aria-label="Select Desired Medium"
+        >
+          <mat-radio-button class="medium-radio-button" value="Email"
+            >Email</mat-radio-button
+          >
+          <mat-radio-button class="medium-radio-button" value="SMS"
+            >SMS</mat-radio-button
+          >
+        </mat-radio-group>
+      </form>
+    </div>
+    <div class="recipient-form">
+      <app-recipient-field
+        [mediumType]="mediumType"
+        (recipients)="recipientHandler($event)"
+      ></app-recipient-field>
+    </div>
+    <div class="recipient-form">
+      <app-recipient-field
+        [mediumType]="mediumType"
+        (recipients)="recipientHandler($event)"
+      ></app-recipient-field>
+    </div>
+  </div>
+</mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+  <button
+    mat-flat-button
+    [disabled]="!mediumForm.valid"
+    (click)="createReminder()"
+  >
+    Create
+  </button>
+  <button mat-stroked-button mat-dialog-close>Close</button>
 </mat-dialog-actions>

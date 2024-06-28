@@ -1,0 +1,47 @@
+.recipient-container {
+  width: 520px;
+
+  .recipient-list-wrapper {
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+
+    mat-list {
+      .mdc-list-item:not(:last-child) {
+        border-bottom: 1px solid #ccc;
+      }
+    }
+
+    .edit-list-row {
+      background: #e7e7e7;
+    }
+
+    .cross-recipient {
+      text-decoration: line-through;
+      color: #f01616;
+    }
+
+    .list-actions-row {
+      display: table-cell;
+      max-width: 120px;
+
+      .actions-flex-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  .recipient-form {
+    width: 100%;
+
+    .recipient-full-width {
+      width: 100%;
+
+      .add-recipient-button {
+        z-index: 3;
+      }
+    }
+  }
+}

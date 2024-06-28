@@ -113,6 +113,12 @@ export class AppComponent implements AfterViewInit {
   readonly dialog = inject(MatDialog);
 
   openDialog() {
-    this.dialog.open(CreateReminderModalComponent);
+    this.dialog.open(CreateReminderModalComponent, {
+      maxWidth: '80vw',
+      maxHeight: '80vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'full-screen-modal',
+    });
   }
 }
